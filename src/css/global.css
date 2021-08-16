@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'IRANSansWeb';
+    src: url('IRANSansWeb(FaNum)_Medium.eot');
+    src: url('IRANSansWeb(FaNum)_Medium.ttf') format('embedded-opentype'),
+    url('IRANSansWeb(FaNum)_Medium.woff') format('woff'),
+   url('IRANSansWeb(FaNum)_Medium.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+html,
+body,
+#app {
+    font-family: 'IRANSansWeb';
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    min-width: 1366px;
+}
+
+.el-breadcrumb {
+    margin-bottom: 15px;
+    font-size: 12px;
+}
+.el-button{
+    font-family: 'IRANSansWeb' !important;
+}
+.el-card {
+    box-shadow: 0 1px 1px rgba(54, 53, 53, 0.15) !important;
+}
+
+.el-table {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.el-pagination {
+    margin-top: 15px;
+}
+
+.el-steps {
+    margin: 15px 0;
+}
+
+.el-step_little {
+    font-size: 13px;
+}
+
+.ql-editor {
+    min-height: 300px;
+}
+.el-form-item{
+    display: flex;
+    margin-bottom:15px !important;
+
+}
+.el-form-item__content{
+    flex: 1;
+    margin-left:0 !important;
+}
