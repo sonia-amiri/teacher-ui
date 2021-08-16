@@ -70,7 +70,7 @@ export default {
       registerFormRules: {
         username: [
           { required: true, message: 'لطفا نام کاربری را وارد کنید', trigger: 'blur' },
-          { min: 6, max: 32, message: 'طول 6 ~ 32 بیت است و باید با یک حرف شروع شود', trigger: 'blur' }
+          { min: 3, max: 32, message: 'طول 3 ~ 32 کاراکتر است و باید با یک حرف شروع شود', trigger: 'blur' }
         ],
         password: [
           { required: true, message: 'لطفاً رمز ورود را وارد کنید', trigger: 'blur' },
@@ -126,10 +126,13 @@ export default {
     register () {
       this.$refs.registerFormRef.validate(async (valid) => {
         if (!valid) return
-        this.$axios.post('http://localhost:3000/auth/search', this.registerForm)
-          .then(value => {
+        this.$axios.post('http://localhost:3000/auth/register', this.registerForm)
+          .then(response => {
+          /* response server */
+
             this.$message.success('ثبت نام موفق آمیز')
-            this.goLogin()
+            /* this.goLogin() */
+            console.log(response)
           })
       })
     },

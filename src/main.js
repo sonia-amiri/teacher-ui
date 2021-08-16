@@ -20,7 +20,7 @@ axios.interceptors.response.use(
       console.log(response.data)
       return Promise.reject(error)
     }
-    return response.data.data
+    return response.data
   },
   // 接口错误状态处理，也就是说无响应时的处理
   error => {
