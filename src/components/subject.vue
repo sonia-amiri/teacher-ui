@@ -46,12 +46,12 @@
 </template>
 
 <script>
-import getSubject from '@/api/subject/getSubject'
-import { errorTip } from '@/utils/tips'
+// import getSubject from '@/api/subject/getSubject'
+// import { errorTip } from '@/utils/tips'
 import store from '../store'
 import { dateTimeFormatter } from '@/utils/time'
 import PaginateTable from './PaginateTable'
-import createSubject from '@/api/subject/createSubject'
+// import createSubject from '@/api/subject/createSubject'
 
 export default {
   name: 'Subject',
@@ -89,25 +89,25 @@ export default {
       this.changePage(1)
     },
     changePage (pageNum) {
-      const params = getSubject.initParams()
-      params.personal = this.myCreate
-      params.pageNum = pageNum
-      getSubject.request(params)
-        .then(resp => {
-          this.subjectList = resp.results
-          this.pagination = resp.pagination
-        })
-        .catch(errorTip)
+      // const params = getSubject.initParams()
+      // params.personal = this.myCreate
+      // params.pageNum = pageNum
+      // getSubject.request(params)
+      //   .then(resp => {
+      //     this.subjectList = resp.results
+      //     this.pagination = resp.pagination
+      //   })
+      //   .catch(errorTip)
     },
     create () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          createSubject.request(this.form)
-            .then(value => {
-              this.editDialogOpen = false
-              this.query()
-            })
-            .catch(errorTip)
+          // createSubject.request(this.form)
+          //   .then(value => {
+          //     this.editDialogOpen = false
+          //     this.query()
+          //   })
+          //   .catch(errorTip)
         } else {
           return false
         }

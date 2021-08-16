@@ -126,7 +126,7 @@ export default {
     register () {
       this.$refs.registerFormRef.validate(async (valid) => {
         if (!valid) return
-        this.$axios.post('api/v1/users', this.registerForm)
+        this.$axios.post('http://localhost:3000/auth/search', this.registerForm)
           .then(value => {
             this.$message.success('ثبت نام موفق آمیز')
             this.goLogin()

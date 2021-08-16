@@ -42,10 +42,10 @@
 </template>
 
 <script>
-import { forTypeName } from '@/api/question/createQuestion'
+// import { forTypeName } from '@/api/question/createQuestion'
 
-import getPaperByPlanId from '@/api/paper/getPaperByPlanId'
-import pushPaper from '@/api/paper/pushPaper'
+// import getPaperByPlanId from '@/api/paper/getPaperByPlanId'
+// import pushPaper from '@/api/paper/pushPaper'
 import { errorTip, successTip } from '@/utils/tips'
 export default {
   name: 'Examining',

@@ -134,10 +134,10 @@
 
 <script>
 import PaginateTable from './PaginateTable'
-import queryQuestion from '@/api/question/queryQuestion'
-import createQuestion from '@/api/question/createQuestion'
-import deleteQuestion from '@/api/question/deleteQuestion'
-import getQuestionById from '@/api/question/getQuestionById'
+// import queryQuestion from '@/api/question/queryQuestion'
+// import createQuestion from '@/api/question/createQuestion'
+// import deleteQuestion from '@/api/question/deleteQuestion'
+// import getQuestionById from '@/api/question/getQuestionById'
 
 import SubjectSelector from './SubjectSelector'
 import QuestionTypeSelector from './QuestionTypeSelector'

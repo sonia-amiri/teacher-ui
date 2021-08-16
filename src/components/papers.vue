@@ -74,10 +74,10 @@
 </template>
 
 <script>
-import { forTypeName } from '@/api/question/createQuestion'
+// import { forTypeName } from '@/api/question/createQuestion'
 
-import getPaperById from '@/api/paper/getPaperById'
-import queryPapers from '@/api/paper/queryPapers'
+// import getPaperById from '@/api/paper/getPaperById'
+// import queryPapers from '@/api/paper/queryPapers'
 
 import SubjectSelector from './SubjectSelector'
 import { errorTip, successTip } from '@/utils/tips'
@@ -86,11 +86,11 @@ export default {
   name: 'papers',
   components: { SubjectSelector },
   created () {
-    const params = queryPapers.initParams()
-    queryPapers.request(params)
-      .then(resp => {
-        this.paperList = resp
-      })
+    // const params = queryPapers.initParams()
+    // queryPapers.request(params)
+    //   .then(resp => {
+    //     this.paperList = resp
+    //   })
   },
   data () {
     return {
@@ -188,8 +188,8 @@ export default {
               { id: 70, typeId: 5, description: { title: '这是个简答题2，随便说几句吧' } }
             ]
           }]
-      },
-      forTypeName
+      }//,
+      // forTypeName
     }
   },
   methods: {
@@ -234,11 +234,11 @@ export default {
         .catch(errorTip)
     },
     openDetail (row, column, event) {
-      console.log('开! ' + row.id)
-      getPaperById.request(row.id)
-        .then(resp => {
-          this.paperPreview = resp
-        })
+      // console.log('开! ' + row.id)
+      // getPaperById.request(row.id)
+      //   .then(resp => {
+      //     this.paperPreview = resp
+      //   })
     }
   }
 }

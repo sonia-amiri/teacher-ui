@@ -22,7 +22,7 @@
 
 <script>
 import { errorTip } from '@/utils/tips'
-import searchUser from '@/api/user/searchUser'
+// import searchUser from '@/api/user/searchUser'
 export default {
   name: 'UserSelector',
   data () {

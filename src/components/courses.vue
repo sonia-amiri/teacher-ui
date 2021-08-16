@@ -125,8 +125,8 @@ import PaginateTable from './PaginateTable'
 import SubjectSelector from './SubjectSelector'
 import UserSelector from './UserSelector'
 
-import queryPapers from '@/api/paper/queryPapers'
-import getCourse from '../api/course/getCourse'
+// import queryPapers from '@/api/paper/queryPapers'
+// import getCourse from '../api/course/getCourse'
 import { errorTip, successTip } from '@/utils/tips'
 import { forDate } from '@/utils/time'
 

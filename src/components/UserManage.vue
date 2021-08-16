@@ -37,10 +37,10 @@
 import PaginateTable from './PaginateTable'
 
 import store from '../store'
-import searchUser from '../api/user/searchUser'
-import deleteUser from '../api/user/deleteUser'
+// import searchUser from '../api/user/searchUser'
+// import deleteUser from '../api/user/deleteUser'
 import { errorTip, successTip } from '@/utils/tips'
-import { forName } from '@/api/baseClass'
+// import { forName } from '@/api/baseClass'
 
 export default {
   name: 'user',

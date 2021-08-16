@@ -13,11 +13,11 @@ const routes = [
     component: () =>
       import('../views/login')
   },
-  {
-    path: '/RegisterStudent',
-    component: () =>
-      import('../views/RegisterStudent.vue')
-  },
+  // {
+  //   path: '/RegisterStudent',
+  //   component: () =>
+  //     import('../views/RegisterStudent.vue')
+  // },
   {
     path: '/RegisterTeacher',
     component: () =>
@@ -32,10 +32,10 @@ const routes = [
         path: 'exam',
         component: () => import('../components/exam.vue')
       },
-      {
-        path: 'users',
-        component: () => import('../components/UserManage.vue')
-      },
+      // {
+      //   path: 'users',
+      //   component: () => import('../components/UserManage.vue')
+      // },
       {
         path: 'courses',
         component: () => import('../components/courses.vue')
@@ -65,11 +65,11 @@ const routes = [
         component: () => import('../components/Examining'),
         props: true
       },
-      {
-        path: 'records',
-        component: () => import('../components/Record'),
-        props: true
-      }
+      // {
+      //   path: 'records',
+      //   component: () => import('../components/Record'),
+      //   props: true
+      // }
     ]
   },
   {
@@ -77,10 +77,10 @@ const routes = [
     component: () =>
       import('../views/teacher'),
     children: [
-      {
-        path: 'Student',
-        component: () => import('../components/Student.vue')
-      },
+      // {
+      //   path: 'Student',
+      //   component: () => import('../components/Student.vue')
+      // },
       {
         path: 'exam',
         component: () => import('../components/exam.vue')
@@ -96,26 +96,26 @@ const routes = [
     ]
 
   },
-  {
-    path: '/Student',
-    component: () =>
-      import('../views/Student'),
-    children: [
-      {
-        path: 'exam',
-        component: () => import('../components/exam.vue')
-      },
-      {
-        path: 'courses',
-        component: () => import('../components/courses.vue')
-      },
-      {
-        path: 'grade',
-        component: () => import('../components/grade.vue')
-      }
-    ]
+  // {
+  //   path: '/Student',
+  //   component: () =>
+  //     import('../views/Student'),
+  //   children: [
+  //     {
+  //       path: 'exam',
+  //       component: () => import('../components/exam.vue')
+  //     },
+  //     {
+  //       path: 'courses',
+  //       component: () => import('../components/courses.vue')
+  //     },
+  //     {
+  //       path: 'grade',
+  //       component: () => import('../components/grade.vue')
+  //     }
+  //   ]
 
-  }
+  // }
 ]
 
 const router = new VueRouter({

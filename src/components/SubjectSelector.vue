@@ -20,7 +20,7 @@
 
 <script>
 import { errorTip } from '@/utils/tips'
-import getSubject from '@/api/subject/getSubject'
+// import getSubject from '@/api/subject/getSubject'
 export default {
   name: 'SubjectSelector',
   data () {
