@@ -64,7 +64,7 @@ const routes = [
         path: 'plan/:id/paper',
         component: () => import('../components/Examining'),
         props: true
-      },
+      }
       // {
       //   path: 'records',
       //   component: () => import('../components/Record'),
@@ -95,7 +95,7 @@ const routes = [
       }
     ]
 
-  },
+  }
   // {
   //   path: '/Student',
   //   component: () =>

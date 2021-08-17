@@ -181,17 +181,17 @@ export default {
   },
   methods: {
     changePage (pageNum) {
-      const params = getCourse.initParams()
-      params.myChosen = this.myChosenChecked
-      params.myCreated = this.myCreatedChecked
-      params.myTaught = this.myTaughtChecked
-      params.pageNum = pageNum
-      getCourse.request(params)
-        .then((data) => {
-          this.courseTable = data.results
-          this.pagination = data.pagination
-        })
-        .catch(errorTip)
+      // const params = getCourse.initParams()
+      // params.myChosen = this.myChosenChecked
+      // params.myCreated = this.myCreatedChecked
+      // params.myTaught = this.myTaughtChecked
+      // params.pageNum = pageNum
+      // getCourse.request(params)
+      //   .then((data) => {
+      //     this.courseTable = data.results
+      //     this.pagination = data.pagination
+      //   })
+      //   .catch(errorTip)
     },
     handleDelete (index, row) {
       this.$axios.delete('api/v1/teacher/courses/' + row.id)
@@ -247,13 +247,13 @@ export default {
       this.examForm.courseId = row.id
     },
     setPapers () {
-      const subjectId = this.examForm.subjectId
-      const params = queryPapers.initParams()
-      params.subjectId = subjectId
-      queryPapers.request(params)
-        .then(resp => {
-          this.papers = resp
-        }).catch(errorTip)
+      // const subjectId = this.examForm.subjectId
+      // const params = queryPapers.initParams()
+      // params.subjectId = subjectId
+      // queryPapers.request(params)
+      //   .then(resp => {
+      //     this.papers = resp
+      //   }).catch(errorTip)
     },
     onSubmitExam () {
       this.examForm.startTime = this.examForm.range[0] / 1000

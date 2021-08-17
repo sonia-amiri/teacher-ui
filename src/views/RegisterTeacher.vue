@@ -126,7 +126,7 @@ export default {
     register () {
       this.$refs.registerFormRef.validate(async (valid) => {
         if (!valid) return
-        this.$axios.post('http://localhost:3000/auth/register', this.registerForm)
+        this.$axios.post(process. env. VUE_APP_BACKEND_URL +'/auth/register', this.registerForm)
           .then(response => {
           /* response server */
 
