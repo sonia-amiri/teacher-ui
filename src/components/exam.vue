@@ -5,11 +5,21 @@
       <el-breadcrumb-item>لیست آزمون ها</el-breadcrumb-item>
       <!--      <el-button @click="editDialogOpen = true" type="primary" icon="el-icon-circle-plus-outline" circle style="float: right"></el-button>-->
     </el-breadcrumb>
+        <el-button @click="addDialogOpen = true" type="primary" icon="el-icon-circle-plus-outline" circle
+        ></el-button>
     <el-card>
       <el-table :data="examList">
-        <el-table-column prop="id" label="شناسه" width="60"></el-table-column>
-        <el-table-column prop="subjectName" label="نام موضوع"></el-table-column>
-        <el-table-column prop="startTime" label="زمان شروع" :formatter="dateTimeFormatter" width="150"></el-table-column>
+        <!-- <el-table-column prop="id" label="شناسه" width="60"></el-table-column> -->
+        <el-table-column prop="name" label="نام موضوع"></el-table-column>
+        <el-table-column align="right" label="نمایش">
+        <template slot-scope="scope">
+            <el-button size="mini"
+                       type="info"
+                       @click="examQuestions(scope.row._id)">نمایش
+            </el-button>
+        </template>
+        </el-table-column>
+        <!-- <el-table-column prop="startTime" label="زمان شروع" :formatter="dateTimeFormatter" width="150"></el-table-column>
         <el-table-column prop="endTime" label="زمان پایان" :formatter="dateTimeFormatter" width="150"></el-table-column>
         <el-table-column prop="paperTitle" label="عنوان مقاله آزمایشی"></el-table-column>
         <el-table-column v-if="state.userInfo.roleId!==3" prop="examRecord" label="عنوان مقاله آزمایشی" :formatter="statusFormatter"
@@ -39,7 +49,7 @@
               نمره:{{ scope.row.examRecord.factScore }}
             </el-button>
           </template>
-        </el-table-column>
+        </el-table-column> -->
       </el-table>
     </el-card>
 
@@ -50,6 +60,20 @@
       <el-progress :text-inside="true" :stroke-width="24" :percentage="stat._60/stat._all*100" status="exception"></el-progress>>60%
       <el-progress :text-inside="true" :stroke-width="24" :percentage="stat._00/stat._all*100" status="exception"></el-progress>&lt;60%
     </el-dialog>
+
+        <el-dialog title="آزمون جدید" :visible.sync="addDialogOpen" width="40%">
+
+      <el-form :inline="true" :model="newExam" class="demo-form-inline">
+        <el-form-item label="عنوان">
+          <el-input v-model="newExam.name" type="textarea" placeholder="عنوان"></el-input>
+        </el-form-item>
+        <el-divider />
+        <el-form-item inline-message>
+          <el-button type="primary" @click="createExam">اضافه کردن </el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -77,6 +101,10 @@ export default {
         paperId: '',
         startTime: 0
       },
+      newExam: {
+        name: ''
+      },
+      addDialogOpen: false,
       papers: [],
       statusFormatter (row, col, record, index) {
         const id = record ? record.releaseStatusId : 0
@@ -109,8 +137,22 @@ export default {
         this.userType = 'teacher'
       }
     },
+    createExam () {
+      const newExam = this.newExam
+      this.$axios.post(process.env.VUE_APP_BACKEND_URL + '/exam/new', newExam)
+        .then(data => {
+          this.getExamList()
+          successTip('با موفقیت ایجاد شد')
+          this.addDialogOpen = false
+        })
+        .catch(errorTip)
+    },
+    examQuestions (id) {
+      console.log(id)
+      this.$router.push('/teacher/questions/' + id)
+    },
     getExamList () {
-      this.$axios.get('api/v1/' + this.userType + '/plans')
+      this.$axios.get(process.env.VUE_APP_BACKEND_URL + '/exam/list')
         .then(data => {
           this.examList = data
         })

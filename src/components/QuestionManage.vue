@@ -12,10 +12,13 @@
         ></el-button>
       </el-col>
     </el-row>
-    <paginate-table :data-list="questionList" :pagination="pagination" :page-change="changePage"
-                    @row-click="openDetail">
-      <el-table-column label="id" prop="id" width="60" />
-      <el-table-column label="انواع" prop="typeId" :formatter="typeFormatter" width="60" />
+    <el-table :data="questionList">
+      <!-- <el-table-column label="id" prop="id" width="60" /> -->
+      <el-table-column label="شماره" prop="index" width="60" />
+      <el-table-column label="سوال" resizable prop="question" show-overflow-tooltip />
+      <el-table-column label="پاسخ" resizable prop="answer" show-overflow-tooltip />
+
+      <!-- <el-table-column label="انواع" prop="typeId" :formatter="typeFormatter" width="60" />
       <el-table-column label="عنوان" resizable prop="description.title" show-overflow-tooltip />
       <el-table-column label="شناسه ایجاده کننده" prop="creatorId" width="90" />
       <el-table-column label="ایجاد کننده " prop="creatorName" width="90" />
@@ -28,8 +31,8 @@
             @click="handleDelete(scope.row.id)">Delete
           </el-button>
         </template>
-      </el-table-column>
-    </paginate-table>
+      </el-table-column> -->
+    </el-table>
 
     <el-dialog title="جزئیات" :visible.sync="detailOpened" width="40%">
       <el-card class="box-card">
@@ -42,9 +45,11 @@
         <div>
           موضوع:{{ detail.subjectId }} {{ detail.subjectName }}
         </div>
+        <!--
         <div>
           انوع:{{ forTypeName(detail.typeId) }}
         </div>
+        -->
         <el-divider>موضوع</el-divider>
         <div>
           {{ detail.description.title }}
@@ -74,58 +79,25 @@
     <el-dialog title="سوال جدید" :visible.sync="addDialogOpen" width="40%">
 
       <el-form :inline="true" :model="newQuestion" class="demo-form-inline">
-        <el-form-item label="موضوع">
-          <subject-selector v-model="newQuestion.subjectId"></subject-selector>
+
+      <el-form-item label="شماره">
+          <el-input v-model="newQuestion.index" type="number" placeholder="شماره"></el-input>
         </el-form-item>
-        <el-form-item label="شرح عنوان">
-          <el-input v-model="newQuestion.question.description.title" type="textarea" placeholder="عنوان"></el-input>
+
+        <el-form-item label="سوال">
+          <el-input v-model="newQuestion.question" type="textarea" placeholder="متن سوال"></el-input>
         </el-form-item>
+
+        <el-card class="box-card">
         <el-form-item>
-          <question-type-selector v-model="newQuestion.question.typeId" />
+            <el-input v-model="newQuestion.answer" type="textarea" placeholder="پاسخ"></el-input>
         </el-form-item>
-        <!--        选择-->
-        <el-card class="box-card" v-if="newQuestion.question.typeId in {1:1,2:2}">
-          <div slot="header" class="clearfix">
-            <el-button
-              @click="newQuestion.question.description.options.push({id:newQuestion.question.description.options.length,name:''})"
-              type="primary" icon="el-icon-circle-plus-outline" circle
-              style="float: right; padding: 0; margin-left: 3px"
-            ></el-button>
-            <el-button @click="newQuestion.question.description.options.pop()" type="danger"
-                       icon="el-icon-remove-outline" circle style="float: right; padding: 0"
-            ></el-button>
-          </div>
-          <div v-for="o in newQuestion.question.description.options" :key="o.id" class="text item">
-            {{ toOption(o.id) }}:
-            <el-form-item>
-              <el-input v-model="o.name" placeholder="محتوای گزینه"></el-input>
-            </el-form-item>
-          </div>
-          <el-radio-group v-model="newQuestion.question.answer.optionId" v-if="newQuestion.question.typeId===1">
-            <el-radio v-for="o in newQuestion.question.description.options" :key="o.id" :label="o.id">
-              {{ toOption(o.id) }}
-            </el-radio>
-          </el-radio-group>
-          <el-checkbox-group v-model="newQuestion.question.answer.optionIds" v-if="newQuestion.question.typeId===2">
-            <el-checkbox v-for="o in newQuestion.question.description.options" :key="o.id" :label="o.id">
-              {{ toOption(o.id) }}
-            </el-checkbox>
-          </el-checkbox-group>
         </el-card>
-        <!--        判断-->
-        <el-card class="box-card" v-if="newQuestion.question.typeId===3">
-          <el-radio-group v-model="newQuestion.question.answer.trueOrFalse">
-            <el-radio :label="true">√</el-radio>
-            <el-radio :label="false">×</el-radio>
-          </el-radio-group>
-        </el-card>
-        <!--        简答-->
-        <el-card class="box-card" v-if="newQuestion.question.typeId===5">
-            <el-input v-model="newQuestion.question.answer.text" type="textarea" placeholder="پاسخ"></el-input>
-        </el-card>
+
         <el-divider />
+
         <el-form-item inline-message>
-          <el-button type="primary" @click="createQuestion">اضافه کردن </el-button>
+          <el-button type="primary" @click="addQuestion">اضافه کردن </el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -133,20 +105,21 @@
 </template>
 
 <script>
-import PaginateTable from './PaginateTable'
+// import PaginateTable from './PaginateTable'
 // import queryQuestion from '@/api/question/queryQuestion'
 // import createQuestion from '@/api/question/createQuestion'
 // import deleteQuestion from '@/api/question/deleteQuestion'
 // import getQuestionById from '@/api/question/getQuestionById'
 
-import SubjectSelector from './SubjectSelector'
-import QuestionTypeSelector from './QuestionTypeSelector'
+// import SubjectSelector from './SubjectSelector'
+// import QuestionTypeSelector from './QuestionTypeSelector'
 import { errorTip, successTip } from '@/utils/tips'
 import store from '../store'
 
 export default {
   name: 'QuestionManage',
-  components: { PaginateTable, SubjectSelector, QuestionTypeSelector },
+  props: ['id'],
+  // components: { PaginateTable, SubjectSelector, QuestionTypeSelector },
   created () {
     this.query()
   },
@@ -161,8 +134,8 @@ export default {
         subjectId: null,
         typeId: null
       },
-      typeFormatter: createQuestion.typeFormatter,
-      forTypeName: createQuestion.forTypeName,
+      // typeFormatter: createQuestion.typeFormatter,
+      // forTypeName: createQuestion.forTypeName,
       detailOpened: false,
       addDialogOpen: false,
       detail: {
@@ -191,20 +164,9 @@ export default {
         }
       },
       newQuestion: {
-        subjectId: 0,
-        question: {
-          typeId: 1,
-          description: {
-            options: [],
-            title: ''
-          },
-          answer: {
-            optionId: 0,
-            optionIds: [],
-            text: '',
-            trueOrFalse: true
-          }
-        }
+        index: 0,
+        question: '',
+        answer: ''
       }
     }
   },
@@ -213,48 +175,45 @@ export default {
       this.changePage(1)
     },
     changePage (pageNum) {
-      const params = queryQuestion.initParams()
-      params.perPage = 20
-      params.pageNum = pageNum
-      params.subjectId = this.form.subjectId
-      params.keyword = this.form.keyword
-      params.typeId = this.form.typeId
-      params.creatorId = this.form.myCreate ? this.state.userInfo.id : null
-      console.log(params)
-      queryQuestion.request(params)
-        .then(resp => {
-          this.questionList = resp.results
-          this.pagination = resp.pagination
+      this.$axios.get(process.env.VUE_APP_BACKEND_URL + '/exam/questions/' + this.$route.params.id)
+        .then(data => {
+          this.questionList = data
         })
         .catch(errorTip)
     },
     openDetail (row, column, event) {
-      console.log('با موفقیت ایجاد شد! ' + row.id)
+      /* console.log('با موفقیت ایجاد شد! ' + row.id)
       getQuestionById.request(row.id)
         .then(resp => {
           this.detail = resp
           this.detailOpened = true
         })
-        .catch(errorTip)
+        .catch(errorTip) */
     },
-    createQuestion () {
-      const newQuestion = this.newQuestion
+    addQuestion () {
+      this.$axios.post(process.env.VUE_APP_BACKEND_URL + '/exam/add-question/' + this.$route.params.id, this.newQuestion)
+        .then(data => {
+          this.query()
+          successTip('سوال افزوده شد')
+        })
+        .catch(errorTip)
+      /* const newQuestion = this.newQuestion
       createQuestion.request(newQuestion)
         .then(value => {
           successTip('با موفقیت ایجاد شد')
           this.addDialogOpen = false
           this.query()
         })
-        .catch(errorTip)
+        .catch(errorTip) */
     },
     handleDelete (id) {
-      console.log(id)
+      /* console.log(id)
       deleteQuestion.request(id)
         .then(value => {
           successTip('با موفقیت حذف شد')
           this.query()
         })
-        .catch(errorTip)
+        .catch(errorTip) */
     },
     toOption (id) {
       return String.fromCharCode(id + 65)

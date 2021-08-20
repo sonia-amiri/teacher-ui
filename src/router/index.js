@@ -53,10 +53,6 @@ const routes = [
         component: () => import('../components/curriculum')
       },
       {
-        path: 'questions',
-        component: () => import('../components/QuestionManage')
-      },
-      {
         path: 'papers',
         component: () => import('../components/papers')
       },
@@ -84,6 +80,10 @@ const routes = [
       {
         path: 'exam',
         component: () => import('../components/exam.vue')
+      },
+      {
+        path: 'questions/:id',
+        component: () => import('../components/QuestionManage')
       },
       {
         path: 'courses',
